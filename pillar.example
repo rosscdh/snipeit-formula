@@ -12,7 +12,7 @@ snipeit:
       start: docker-compose up
       stop: docker-compose stop
 
-    supporting_files: []
+    supporting_files:
       - name: .env.docker
         #location: /custom/location # if not specified will use the app.location + file.name
         #mode: 744 # default 744
