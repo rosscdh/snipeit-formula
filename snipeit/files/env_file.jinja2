@@ -1,0 +1,7 @@
+{%- set app_config = pillar.get('snipeit').get(app.name) %}
+#
+# Managed by salt snipeit
+#
+{%- for key, value in app_config.get('env', {}).items() %}
+{{ key }}={{ value }}
+{%- endfor %}

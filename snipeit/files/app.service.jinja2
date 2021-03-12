@@ -1,0 +1,29 @@
+{%- set app_config = pillar.get('snipeit').get(app.name) %}
+[Unit]
+Description={{ app.get('name') }}
+Wants=network-online.target
+After=network-online.target docker.socket firewalld.service
+Requires=docker.socket
+
+[Service]
+WorkingDirectory={{ app.get('location') }}
+
+EnvironmentFile={{ app.get('location') }}/.env
+ExecStart={{ app_config.get('cmd').get('start') }}
+ExecStop={{ app_config.get('cmd').get('stop') }}
+
+# Let systemd restart this service always
+Restart=on-failure
+RestartSec=30
+StartLimitBurst=3
+StartLimitInterval=60s
+
+# Specifies the maximum file descriptor number that can be opened by this process
+LimitNOFILE={{ app_config.get('limit_nofile', '65536') }}
+
+# Disable timeout logic and wait until process is stopped
+TimeoutStopSec=infinity
+SendSIGKILL=no
+
+[Install]
+WantedBy=multi-user.target

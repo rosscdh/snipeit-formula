@@ -1,0 +1,7 @@
+name: snipeit
+os: CentOS
+os_family: RedHat
+version: 0.0.1
+release: 1
+description: Start an app with systemd and run with docker-compose
+top_level_dir:  snipeit

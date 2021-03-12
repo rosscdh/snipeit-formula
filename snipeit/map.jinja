@@ -1,0 +1,2 @@
+{% import_yaml 'snipeit/config/defaults.yaml' as preconfig %}
+{% set config = salt['pillar.get']( 'snipeit', default=preconfig.snipeit, merge=True ) %}
